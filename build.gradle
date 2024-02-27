@@ -26,6 +26,12 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //여기서 작성한 `module-common`은 멀티 모듈 루트 프로젝트에서 settings.gradle에서 설정한 include 'module-common' 명과 동일해야한다.
+    //module-api 모듈이 다른 모듈에 대한 의존성을 가지고 있음을 Gradle에게 알려주는 방식이라고 함.
+    //여기서 :module-common은 모듈의 이름을 나타내고, 이 구문을 build.gradle 파일에 추가함으로써
+    //gradle은 빌드 시 해당 모듈을 컴파일하고 실행할 때 필요한 모든 클래스와 리소스를 포함시킨다.
+    implementation project(':module-common')
 }
 
 tasks.named('bootBuildImage') {
@@ -35,3 +41,5 @@ tasks.named('bootBuildImage') {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register("prepareKotlinBuildScriptModel") {}
