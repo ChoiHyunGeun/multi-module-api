@@ -4,14 +4,15 @@ import dev.be.moduleapi.exception.CustomException;
 import dev.be.modulecommon.domain.Member;
 import dev.be.modulecommon.enums.CodeEnum;
 import dev.be.modulecommon.repositories.MemberRepository;
-import dev.be.modulecommon.service.CommonDemoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class DemoService {
-    private final CommonDemoService commonDemoService;
+    @Value("${profile-name}")
+    private String name;
 
     private final MemberRepository memberRepository;
     public String save() {
@@ -19,11 +20,11 @@ public class DemoService {
                 .name("나다")
                 .build());
         System.out.println(CodeEnum.SUCCESS.getCode());
-        System.out.println(commonDemoService.commonService());
         return "save";
     }
 
     public String find() {
+        System.out.println("name : " + name);
         System.out.println(memberRepository.findAll().size());
         return "find";
     }

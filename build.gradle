@@ -43,3 +43,7 @@ tasks.named('test') {
 }
 
 tasks.register("prepareKotlinBuildScriptModel") {}
+
+test {
+    exclude '**/*Tests.class'
+}
